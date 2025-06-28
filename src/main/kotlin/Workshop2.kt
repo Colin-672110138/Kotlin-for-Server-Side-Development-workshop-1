@@ -61,6 +61,18 @@ fun main() {
     println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500Sequence บาท")
     println("--------------------------------------------------")
 
+    println("กลุ่มสินค้าตามราคา:")
+    println("10000 ขึ้นไป:")
+    val one = products.filter { it.price >= 10000 }
+    one.forEach { println("ชื่อสินค้า: ${it.name}, ราคา: ${it.price}, หมวดหมู่: ${it.category}") }
+
+    println("\nไม่เกิน 1000:")
+    val two = products.filter { it.price < 1000 }
+    two.forEach { println("ชื่อสินค้า: ${it.name}, ราคา: ${it.price}, หมวดหมู่: ${it.category}") }
+    
+    println("\n1000 - 9999 ขึ้นไป:")
+    val three = products.filter { it.price >= 1000 && it.price <= 9999 }
+    three.forEach { println("ชื่อสินค้า: ${it.name}, ราคา: ${it.price}, หมวดหมู่: ${it.category}") }
 
     println("อภิปรายความแตกต่างระหว่าง List และ Sequence:")
     println("1. List Operations (วิธีที่ 1):")
