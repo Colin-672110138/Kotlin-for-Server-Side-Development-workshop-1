@@ -13,9 +13,21 @@ fun main() {
     // สินค้า name = "Jeans", price = 1200.0, category = "Apparel"
     // สินค้า name = "Headphones", price = 1800.0, category = "Electronics" // ตรงตามเงื่อนไข
 //🚨    val products = ?
+    val products = listOf(
+        Product(name = "Laptop", price = 35000.0, category = "Electronics"),
+        Product(name = "Smartphone", price = 25000.0, category = "Electronics"),
+        Product(name = "T-shirt", price = 450.0, category = "Apparel"),
+        Product(name = "Monitor", price = 7500.0, category = "Electronics"),
+        Product(name = "Keyboard", price = 499.0, category = "Electronics"), // ราคาไม่เกิน 500
+        Product(name = "Jeans", price = 1200.0, category = "Apparel"),
+        Product(name = "Headphones", price = 1800.0, category = "Electronics") // ตรงตามเงื่อนไข
+    )
 
     println("รายการสินค้าทั้งหมด:")
 //🚨    products.forEach { println(it) }
+    products.forEach { product ->
+        println("ชื่อสินค้า: ${product.name}, ราคา: ${product.price}, หมวดหมู่: ${product.category}")
+    }
     println("--------------------------------------------------")
 
     // --- โจทย์: จงหาผลรวมราคาสินค้าทั้งหมดในหมวด 'Electronics' ที่มีราคามากกว่า 500 บาท ---
@@ -26,9 +38,12 @@ fun main() {
     // ดึงเฉพาะราคาออกมาเป็น List<Double>
     // หาผลรวมของราคา
 //🚨    val totalElecPriceOver500 = ?
+    val totalElecPriceOver500 = products
+        .filter { it.category == "Electronics" && it.price > 500 }
+        .sumOf { it.price }
 
     println("วิธีที่ 1: ใช้ Chaining กับ List")
-//🚨    println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500 บาท")
+    println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500 บาท")
     println("--------------------------------------------------")
 
 
@@ -38,6 +53,12 @@ fun main() {
 
     println("วิธีที่ 2: ใช้ .asSequence() (ขั้นสูง)")
 //🚨    println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500Sequence บาท")
+    val totalElecPriceOver500Sequence = products
+        .asSequence() // แปลงเป็น Sequence
+        .filter { it.category == "Electronics" && it.price > 500 } // กรองสินค้าหมวด Electronics และราคามากกว่า 500
+        .sumOf { it.price } // หาผลรวมราคา
+
+    println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500Sequence บาท")
     println("--------------------------------------------------")
 
 
